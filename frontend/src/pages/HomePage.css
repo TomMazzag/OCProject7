@@ -1,0 +1,8 @@
+.content {
+    margin: 30px;
+}
+
+.home-page-heading {
+    border-bottom: 8px solid var(--tertiary); /* You can adjust the thickness and color of the line */
+    padding-bottom: 8px;
+}
