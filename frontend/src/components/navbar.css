@@ -7,19 +7,20 @@ nav {
 }
 
 nav .logo {
-    width: 20%;
+    width: 50%;
 }
 
 nav button {
     background: #1877F2;
     color: white;
-    padding: 8px 16px;
+    padding: 7px 16px;
     border-radius: 4px;
     cursor: pointer;
     margin-left: 10px;
     outline: none;
     border: none;
     font-size: larger;
+    border: 2px solid transparent;
 }
 
 nav button:hover {

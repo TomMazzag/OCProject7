@@ -1,0 +1,27 @@
+.account-page-heading {
+    border-bottom: 8px solid var(--tertiary); 
+    padding-bottom: 8px;
+}
+
+.account-page {
+    text-align: center;
+    margin: 20px 30%;
+}
+
+.account-user-details {
+    height: 50%;
+}
+
+.delete-account {
+    background-color: #dc3545; 
+    color: #fff; 
+    padding: 10px 15px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+}
+
+.delete-account:hover {
+    background-color: #c82333;
+}
