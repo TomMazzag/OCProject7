@@ -24,6 +24,16 @@
 
 .login a {
     padding-top: 20px;
+    text-decoration: none;
+    color: blue;
+}
+
+.login a:visited {
+    color: blue;
+}
+
+.login a:hover {
+    text-decoration: underline;
 }
 
 .login form {

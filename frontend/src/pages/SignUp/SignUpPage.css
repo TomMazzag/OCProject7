@@ -17,6 +17,16 @@
 
 .signup a {
     padding-top: 20px;
+    text-decoration: none;
+    color: blue;
+}
+
+.signup a:visited {
+    color: blue;
+}
+
+.signup a:hover {
+    text-decoration: underline;
 }
 
 .signup form {
