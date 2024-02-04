@@ -1,8 +1,27 @@
-.content {
-    margin: 30px;
+.home-page-heading {
+    border-bottom: 8px solid var(--tertiary); 
+    padding-bottom: 8px;
+    margin: 30px
 }
 
-.home-page-heading {
-    border-bottom: 8px solid var(--tertiary); /* You can adjust the thickness and color of the line */
-    padding-bottom: 8px;
+.content {
+    margin: 30px;
+    display: flex;
+    height: 500px;
 }
+
+.topics {
+    width: 20%;
+    border-right: 1px solid var(--tertiary);
+}
+
+.feed {
+    width: 80%;
+    padding-left: 10px;
+}
+
+.topics h2{
+    border-bottom: 1px solid var(--tertiary);
+    padding-bottom: 10px;
+}
+

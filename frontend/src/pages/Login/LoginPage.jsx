@@ -1,20 +1,24 @@
-import { Navbar } from "../../components/navbar"
 import "./LoginPage.css"
+import logo from "../../assets/Groupomania_Logos/icon-left-font-monochrome-white.svg";
 
 export const LoginPage = () => {
     return (
         <>
-            <Navbar />
-            <div className="account-page">
-                <h1 className="account-page-heading">Account Page</h1> 
-                {/*Placeholder Text*/}
-                <div className="account-user-details">
-                    <p>Full Name</p>
-                    <p>Email</p>
-                    <p>Password</p>
+            <nav className="login-page-nav">
+                <img src={logo} alt="Groupomania logo" className="logo" />
+            </nav>
+            <h1>Login</h1>
+            <form action="">
+                <div>
+                    <label htmlFor="">Company Email</label>
+                    <input type="text" />
                 </div>
-                <button className="delete-account">Delete Account</button>
-            </div>
+                <div>
+                    <label htmlFor="">Password</label>
+                    <input type="password" />
+                </div>
+            </form>
+            <a href="/signup">New here, create an account!</a>
         </>
     )
 }

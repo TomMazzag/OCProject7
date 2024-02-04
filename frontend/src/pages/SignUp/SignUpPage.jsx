@@ -1,9 +1,12 @@
-import { Navbar } from "../../components/navbar"
 import "./SignUpPage.css"
+import logo from "../../assets/Groupomania_Logos/icon-left-font-monochrome-white.svg";
 
 export const SignUpPage = () => {
     return (
         <>
+            <nav className="login-page-nav">
+                <img src={logo} alt="Groupomania logo" className="logo" />
+            </nav>
             <h1>SignUp</h1>
             <form action="">
                 <div>
@@ -22,6 +25,7 @@ export const SignUpPage = () => {
                     <label htmlFor="">Verify Password</label>
                     <input type="password" />
                 </div>
+                <a href="/login">Already have an account? Login here!</a>
             </form>
         </>
     )
