@@ -7,8 +7,9 @@ export const LoginPage = () => {
             <nav className="login-page-nav">
                 <img src={logo} alt="Groupomania logo" className="logo" />
             </nav>
-            <h1>Login</h1>
-            <form action="">
+            <div className="login">
+                <h1>Login</h1>
+                <form action="">
                 <div>
                     <label htmlFor="">Company Email</label>
                     <input type="text" />
@@ -17,8 +18,9 @@ export const LoginPage = () => {
                     <label htmlFor="">Password</label>
                     <input type="password" />
                 </div>
-            </form>
-            <a href="/signup">New here, create an account!</a>
+                <a href="/signup">New here, create an account!</a>
+                </form>
+            </div>
         </>
     )
 }

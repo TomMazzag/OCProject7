@@ -5,3 +5,48 @@
 .login-page-nav .logo{
     width: 30%;
 }
+
+.login {
+    text-align: center;
+    background-color: white;
+    width: 300px;
+    border-radius: 10px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login h1 {
+    padding-top: 15px;
+}
+
+.login a {
+    padding-top: 20px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login div {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-self: center;
+}
+
+.login div label {
+    align-self: flex-start;
+    margin-bottom: 5px;
+}
+
+.login input {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
