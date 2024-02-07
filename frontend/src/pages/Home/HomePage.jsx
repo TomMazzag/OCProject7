@@ -11,6 +11,9 @@ export const HomePage = () => {
             <div className="content">
                <div className="topics">
                 <h2>Followed Topics</h2>
+                <ul>
+                    <li>General</li>
+                </ul>
                </div>
                <div className="feed">
                 <h2>My Feed</h2>

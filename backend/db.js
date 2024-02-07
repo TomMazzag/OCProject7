@@ -1,5 +1,5 @@
 const mysql = require('mysql2')
-const envVariables = require('./environmentVariables')
+require("dotenv").config();
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -70,6 +70,4 @@ connection.execute(
         }
     }
 );
-
-
 
