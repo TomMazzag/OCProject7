@@ -27,3 +27,5 @@ connection.connect((error) => {
 
 app.use("/api/auth", userRoute);
 app.use("/api/posts", postRoute);
+
+module.exports = app
