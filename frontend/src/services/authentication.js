@@ -1,5 +1,5 @@
-require("dotenv").config();
-const BACKEND_URL = process.env.BACKEND_URL;
+const config = require("../config");
+const BACKEND_URL = config.BACKEND_URL;
 
 export const login = async (email, password) => {
     const payload = {
@@ -15,7 +15,7 @@ export const login = async (email, password) => {
         body: JSON.stringify(payload),
     };
 
-    const response = await fetch(`${BACKEND_URL}/api/auth/signup`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/auth/signup`, requestOptions);
 
     if (response.status === 201) {
         let data = await response.json();
@@ -42,7 +42,7 @@ export const signup = async (full_name, email, password) => {
         body: JSON.stringify(payload),
     };
 
-    const response = await fetch(`${BACKEND_URL}/api/auth/signup`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/auth/signup`, requestOptions);
 
     if (response.status === 201) {
         return;
