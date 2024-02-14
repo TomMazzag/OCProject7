@@ -2,6 +2,7 @@ import "./SignUpPage.css"
 import logo from "../../assets/Groupomania_Logos/icon-left-font-monochrome-white.svg";
 import { useState } from "react";
 import { signup } from "../../services/authentication";
+import { useNavigate } from "react-router-dom";
 
 export const SignUpPage = () => {
     const [full_name, setFull_name] = useState("");
@@ -9,6 +10,7 @@ export const SignUpPage = () => {
     const [password, setPassword] = useState("");
     const [verifyPassword, setVerifyPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("")
+    const navigate = useNavigate()
 
     function isValidEmail(email) {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -51,8 +53,10 @@ export const SignUpPage = () => {
 
         try {
             await signup(full_name, email, password)
+            navigate("/login")
         } catch (err) {
-            console.error(err)
+            console.error(err.message)
+            return setErrorMessage(err.message)
         }
         
     }

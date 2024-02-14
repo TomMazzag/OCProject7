@@ -15,11 +15,13 @@ export const login = async (email, password) => {
         body: JSON.stringify(payload),
     };
 
-    const response = await fetch(`${BACKEND_URL}/auth/signup`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/auth/login`, requestOptions);
 
-    if (response.status === 201) {
+    if (response.status === 200) {
         let data = await response.json();
-        return [data.token, data.id];
+        return [data.token, data.userId];
+    } else if (response.status === 401) {
+        throw new Error("Incorrect password");
     } else {
         throw new Error(
             `Received status ${response.status} when logging in. Expected 201`
@@ -46,6 +48,9 @@ export const signup = async (full_name, email, password) => {
 
     if (response.status === 201) {
         return;
+    } else if (response.status === 409) {
+        console.log("Duplicate EMAIL")
+        throw new Error("Duplicate email")
     } else {
         throw new Error(
             `Received status ${response.status} when signing up. Expected 201`

@@ -1,9 +1,59 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const connection = require("../connectdb")
+require("dotenv").config();
 
 exports.signup = (req, res) => {
-    console.log(req.body.email);
-    res.status(201);
+    bcrypt.hash(req.body.password, 10)
+    .then((hash) => {
+        const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+        const values = [req.body.name, req.body.email, hash];
+        connection.query(sql, values, (error) => {
+            if (error) {
+                if (error.code === 'ER_DUP_ENTRY') {
+                    return res.status(409).json({ error: "Email already exists" });
+                } else {
+                console.error(error)
+                res.status(500).json({ error: "Problem adding to users"})
+                }
+            }
+            res.status(201).json({ message: "User created successfully" });
+        })
+    }).catch ((error) => {
+        console.error(error)
+        res.status(500).json({ error: "Error hashing the password" })
+    })
 };
 
-exports.login = (req, res) => {};
+exports.login = (req, res) => {
+    const sql = "SELECT userID, email, password FROM users WHERE email = ?";
+    const values = [req.body.email];
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error(error)
+        }
+        bcrypt
+            .compare(req.body.password, results[0].password)
+            .then((valid) => {
+                if (!valid) {
+                    return res.status(401).json({
+                        error: new Error("Incorrect password!"),
+                    });
+                }
+                const token = jwt.sign(
+                    { userId: results[0].userID },
+                    process.env.SECRET_TOKEN,
+                    { expiresIn: "24h" }
+                );
+                res.status(200).json({
+                    userId: results[0].userID,
+                    token: token,
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({
+                    error: error,
+                });
+            });
+    })
+};
