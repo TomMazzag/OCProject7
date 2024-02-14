@@ -1,9 +1,10 @@
 .post {
-    border: 1px solid var(--secondary);
+    color: var(--secondary);
     padding: 15px;
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
+    background-color: #f0f0f0;
 }
 
 .post h3 {

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "./createPost.css";
 import { addNewPost } from "../services/post";
 
-export const CreatePost = ({ userId }) => {
+export const CreatePost = ({ userId,  setPostUpdate }) => {
     const [post, setPost] = useState("")
     const token = window.localStorage.getItem("token")
 
@@ -15,6 +15,7 @@ export const CreatePost = ({ userId }) => {
     const handleSubmit = async () => {
         try{
             await addNewPost(token, post)
+            setPostUpdate(true)
             setPost("")
         } catch (error) {
             console.error(error)

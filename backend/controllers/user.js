@@ -57,3 +57,21 @@ exports.login = (req, res) => {
             });
     })
 };
+
+exports.getUserDetails = (req, res) => {
+    const sql = `
+    SELECT * FROM users
+    WHERE userId = ?
+    `;
+    const values = [req.userId];
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ error: "Problem getting details" });
+        }
+        res.status(201).json({
+            message: "Collected user details successfully",
+            details: results[0],
+        });
+    });
+};

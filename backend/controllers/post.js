@@ -1,7 +1,13 @@
 const connection = require("../connectdb");
 
 exports.getAllPosts = (req, res) => {
-    const sql = "SELECT * FROM posts";
+    const sql = `
+    SELECT posts.*, users.name
+    FROM posts
+    JOIN users
+    ON posts.userID = users.userID
+    ORDER BY posts.creation_date DESC
+    `;
     connection.query(sql, (error, results) => {
         if (error) {
             console.error(error);

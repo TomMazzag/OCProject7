@@ -7,7 +7,6 @@
 .content {
     margin: 30px;
     display: flex;
-    height: 500px;
 }
 
 .topics {
@@ -32,4 +31,23 @@
 
 .feed-posts {
     margin: 10px;
+}
+
+.topics a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.topics a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.topics a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.topics li {
+    margin-bottom: 10px;
 }

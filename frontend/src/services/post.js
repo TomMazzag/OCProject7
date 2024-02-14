@@ -36,12 +36,12 @@ export const getAllPosts = async (token) => {
     };
 
     const response = await fetch(`${BACKEND_URL}/posts`, requestOptions);
-
     if (response.status === 201) {
-        return;
+        const data = await response.json()
+        return data;
     } else {
         throw new Error(
-            `Received status ${response.status} when adding a new post. Expected 201`
+            `Received status ${response.status} when getting posts. Expected 201`
         );
     }
 };

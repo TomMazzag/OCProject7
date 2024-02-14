@@ -50,13 +50,13 @@ connection.execute(`CREATE TABLE IF NOT EXISTS users(
     }
 });
 
-connection.execute("DROP TABLE IF EXISTS posts")
+//connection.execute("DROP TABLE IF EXISTS posts")
 connection.execute(
     `CREATE TABLE IF NOT EXISTS posts(
     postID int AUTO_INCREMENT PRIMARY KEY,
     userID int NOT NULL,
     title VARCHAR(100) NOT NULL,
-    message VARCHAR(100) NOT NULL,
+    message VARCHAR(300) NOT NULL,
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modify_date TIMESTAMP,
     readBy TEXT
