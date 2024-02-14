@@ -21,7 +21,8 @@ export const LoginPage = () => {
         event.preventDefault();
 
         try {
-            await login(email, password);
+            const loginData = await login(email, password);
+            window.localStorage.setItem("token", loginData[0])
             navigate("/home");
         } catch (err) {
             console.error(err.message);

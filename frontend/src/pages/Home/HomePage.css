@@ -16,12 +16,20 @@
 }
 
 .feed {
-    width: 80%;
-    padding-left: 10px;
+    width: 50%;
+    margin-left: 10px;   
 }
 
-.topics h2{
+.topics h2, .feed h2, .news h2{
     border-bottom: 1px solid var(--tertiary);
     padding-bottom: 10px;
 }
 
+.news {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.feed-posts {
+    margin: 10px;
+}

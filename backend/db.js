@@ -33,7 +33,7 @@ connection.changeUser({database: "groupomania"}, (error) => {
     }
 });
 
-connection.execute("DROP TABLE IF EXISTS users")
+//connection.execute("DROP TABLE IF EXISTS users")
 connection.execute(`CREATE TABLE IF NOT EXISTS users(
     userID int AUTO_INCREMENT NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -50,16 +50,14 @@ connection.execute(`CREATE TABLE IF NOT EXISTS users(
     }
 });
 
-//connection.execute("DROP TABLE IF EXISTS posts")
+connection.execute("DROP TABLE IF EXISTS posts")
 connection.execute(
     `CREATE TABLE IF NOT EXISTS posts(
-    postID int PRIMARY KEY,
+    postID int AUTO_INCREMENT PRIMARY KEY,
     userID int NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    media VARCHAR(100),
     title VARCHAR(100) NOT NULL,
     message VARCHAR(100) NOT NULL,
-    creation_date TIMESTAMP,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     modify_date TIMESTAMP,
     readBy TEXT
 )`,

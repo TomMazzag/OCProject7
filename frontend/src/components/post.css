@@ -1,0 +1,20 @@
+.post {
+    border: 1px solid var(--secondary);
+    padding: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.post h3 {
+    margin: 0;
+}
+
+.post p {
+    margin-bottom: 0;
+}
+
+.timestamp {
+    margin: 0;
+    color: rgb(80, 80, 80);
+}
