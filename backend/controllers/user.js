@@ -69,9 +69,42 @@ exports.getUserDetails = (req, res) => {
             console.error(error);
             res.status(500).json({ error: "Problem getting details" });
         }
-        res.status(201).json({
+        res.status(200).json({
             message: "Collected user details successfully",
             details: results[0],
         });
     });
 };
+
+exports.updateDetails = (req, res) => {
+    const { name, email, bio } = req.body;
+
+    const changedFields = [];
+    if (name) changedFields.push("name");
+    if (email) changedFields.push("email");
+    if (bio) changedFields.push("bio");
+    let sql = `UPDATE users SET`
+    const values = []
+
+    changedFields.forEach((field, index) => {
+        sql += ` ${field} = ?`;
+        values.push(req.body[field]);
+        if (index < changedFields.length - 1) {
+            sql += ",";
+        }
+    });
+
+    
+    sql += ` WHERE userId = ?`;
+    values.push(req.userId);
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ error: "Problem getting details" });
+        }
+        res.status(201).json({
+            message: "Collected user details successfully",
+            details: results[0],
+        });
+    });
+}

@@ -13,12 +13,33 @@ export const getUserDetails = async (token) => {
         `${BACKEND_URL}/auth/details`,
         requestOptions
     );
-    if (response.status === 201) {
+    if (response.status === 200) {
         const data = await response.json();
         return data;
     } else {
         throw new Error(
             `Received status ${response.status} when getting user details. Expected 201`
+        );
+    }
+};
+
+export const UpdateUserDetails = async (token, payload) => {
+    const requestOptions = {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    };
+
+    const response = await fetch(`${BACKEND_URL}/auth/update`, requestOptions);
+    if (response.status === 201) {
+        const data = await response.json();
+        return data;
+    } else {
+        throw new Error(
+            `Received status ${response.status} when updating user details. Expected 201`
         );
     }
 };

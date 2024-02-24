@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { Navbar } from "../../components/navbar"
 import "./AccountPage.css"
-import { getUserDetails } from "../../services/account"
+import { UpdateUserDetails, getUserDetails } from "../../services/account"
 
 export const AccountPage = () => {
     const [user, setUser] = useState()
@@ -12,18 +12,33 @@ export const AccountPage = () => {
     const [newPassword, setNewPassword] = useState("");
     const [editPassword, setEditPassword] = useState(false)
     const [disableSave, setDisableSave] = useState(true)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [successMessage, setSuccessMessage] = useState("")
 
     useEffect(() => {
+        let timer;
+
+        if (successMessage || errorMessage) {
+            timer = setTimeout(() => {
+                setSuccessMessage("");
+                setErrorMessage("");
+                window.location.reload()
+            }, 3000);
+        }
+
         getUserDetails(token)
         .then((user) => {
             setUser(user.details)
             setNewUsername(user.details.name)
             setNewEmail(user.details.email)
+            if (user.details.bio !== "") {
+                setAboutMe(user.details.bio)
+            }
         })
         .catch((err) => {
             console.error(err)
         })
-    }, [token])
+    }, [token, successMessage, errorMessage])
 
     const toggleEdit = () => {
         setEditPassword(!editPassword)
@@ -31,11 +46,30 @@ export const AccountPage = () => {
 
     const saveDetails = () => {
         console.log("Trying to update profile")
+        let payload = {}
+        if (newUsername !== user.name) {
+            payload["name"] = newUsername
+        }
+        if (newEmail !== user.email) {
+            payload["email"] = newEmail;
+        }
+        if (aboutMe !== "") {
+            payload["bio"] = aboutMe;
+        }
+        try {
+            UpdateUserDetails(token, payload)
+            setSuccessMessage("Details updated successfully")
+        } catch(error) {
+            setErrorMessage(`Error: ${error}`)
+        }
     }
+
+    // useEffect(() => {
+    // }, [successMessage, errorMessage])
 
     useEffect(() => {
         if (user) {
-            if (newUsername != user.name || newEmail != user.email || aboutMe !== "") {
+            if (newUsername != user.name || newEmail != user.email || aboutMe !== user.bio) {
                 setDisableSave(false)
             } else {
                 setDisableSave(true)
@@ -58,6 +92,7 @@ export const AccountPage = () => {
                 <h1 className="account-page-heading">Account Page</h1>
                 {user ? (
                     <div className="account-user-details">
+                        {successMessage && <p className="success-message">{successMessage}</p>}
                         <div className="edit-section">
                             <input value={newUsername} onChange={(e) => setNewUsername(e.target.value)}></input>
                         </div>
@@ -65,7 +100,7 @@ export const AccountPage = () => {
                             <input value={newEmail} onChange={(e) => setNewEmail(e.target.value)}></input>
                         </div>
                         <textarea
-                            placeholder="Add an about me"
+                            placeholder={user.bio ? user.bio : "Add an about me"}
                             className="about-me"
                             type="text"
                             value={aboutMe}
@@ -84,6 +119,7 @@ export const AccountPage = () => {
                             onClick={saveDetails} 
                             disabled={disableSave}
                         >Save</button>
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
                     </div>
                 ) : (
                     <h1>Loading...</h1>

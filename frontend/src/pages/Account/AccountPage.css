@@ -94,3 +94,9 @@
 .delete-account:hover {
     background-color: #c82333;
 }
+
+.success-message {
+    color: rgb(8, 154, 8);
+    width: 100%;
+    margin-top: 0;
+}
