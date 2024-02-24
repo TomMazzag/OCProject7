@@ -43,3 +43,21 @@ export const UpdateUserDetails = async (token, payload) => {
         );
     }
 };
+
+export const deleteAccount = async (token) => {
+    const requestOptions = {
+    method: "DELETE",
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+    };
+
+    const response = await fetch(`${BACKEND_URL}/auth/delete`, requestOptions);
+    if (response.status === 202) {
+        return;
+    } else {
+        throw new Error(
+            `Received status ${response.status} when deleting user. Expected 202`
+        );
+    }
+}

@@ -108,3 +108,17 @@ exports.updateDetails = (req, res) => {
         });
     });
 }
+
+exports.delete = (req, res) => {
+    const sql = "DELETE FROM users WHERE userId = ?";
+    const values = [req.userId];
+    connection.query(sql, values, (error) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ error: "Problem deleting user" });
+        }
+        res.status(202).json({
+            message: "User deleted successfully"
+        });
+    });
+}

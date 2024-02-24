@@ -4,13 +4,18 @@ import { CreatePost } from "../../components/createPost"
 import "./HomePage.css"
 import { useEffect, useState } from "react"
 import { getAllPosts } from "../../services/post"
+import { useNavigate } from "react-router-dom"
 
 export const HomePage = () => {
     const token = window.localStorage.getItem("token")
     const [posts, setPosts] = useState([])
     const [postUpdate, setPostUpdate] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
+        if (!token) {
+            navigate("/login");
+        }
         getAllPosts(token)
         .then((data) => {
             setPosts(data.posts)

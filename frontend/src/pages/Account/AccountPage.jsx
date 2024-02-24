@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react"
 import { Navbar } from "../../components/navbar"
 import "./AccountPage.css"
-import { UpdateUserDetails, getUserDetails } from "../../services/account"
+import { UpdateUserDetails, getUserDetails, deleteAccount } from "../../services/account"
+import { useNavigate } from "react-router-dom"
 
 export const AccountPage = () => {
+
     const [user, setUser] = useState()
     const token = window.localStorage.getItem("token")
     const [aboutMe, setAboutMe] = useState("")
@@ -14,6 +16,8 @@ export const AccountPage = () => {
     const [disableSave, setDisableSave] = useState(true)
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         let timer;
@@ -64,9 +68,6 @@ export const AccountPage = () => {
         }
     }
 
-    // useEffect(() => {
-    // }, [successMessage, errorMessage])
-
     useEffect(() => {
         if (user) {
             if (newUsername != user.name || newEmail != user.email || aboutMe !== user.bio) {
@@ -84,6 +85,16 @@ export const AccountPage = () => {
             textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
         }
     }, [aboutMe]);
+
+    const deleteUser = () => {
+        try {
+            deleteAccount(token)
+            window.localStorage.removeItem("token")
+            navigate("/login")
+        } catch (error) {
+            setErrorMessage(`Error: ${error}`);
+        }
+    }
 
     return (
         <>
@@ -124,8 +135,18 @@ export const AccountPage = () => {
                 ) : (
                     <h1>Loading...</h1>
                 )}
-                <button className="delete-account">Delete Account</button>
+                <button className="delete-account" onClick={() => setConfirmDelete(true)}>Delete Account</button>
             </div>
+            {confirmDelete && <div className="delete-popup-box">
+                <div className="popup-content">
+                    <h1>Delete Account</h1>
+                    <p>Are you sure you want to delete your account?</p>
+                    <div className="popup-options">
+                        <button className="cancel" onClick={() => setConfirmDelete(false)}>Cancel</button>
+                        <button className="delete-account" onClick={deleteUser}>Yes</button>
+                    </div>
+                </div>
+            </div>}
         </>
     );
 }
