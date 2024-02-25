@@ -25,7 +25,7 @@
 }
 
 .news {
-    flex-grow: 1;
+    width: 30%;
     margin-left: 20px;
 }
 
@@ -50,4 +50,8 @@
 
 .topics li {
     margin-bottom: 10px;
+}
+
+.news-feed {
+    padding: 0 10px;
 }
